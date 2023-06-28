@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,具体到dao中的那个dao接口-->
+<mapper namespace="org.library.dao.bookDao">
+    <!--id对应的Mapper代理接⼝⽅法的⽅法名,这里也就是StudentDao接口的方法的方法名-->
+    <!-- resultType对应pojo中的实体类，等价于数据库中的student表 -->
+    <select id="findAllBook" resultType="org.library.pojo.Book">
+        select * from Book
+    </select>
+
+    <select id="findBook" resultType="org.library.pojo.Book" parameterType="org.library.pojo.Book">
+        select *
+        from Book
+        <where>
+            <if test="bid != null and bid!=''">
+                bid=#{bid}
+            </if>
+            <if test="bname != null and bname !=''">
+                and bname like concat('%', #{bname}, '%')
+            </if>
+
+            <if test="bauthor != null and bauthor !=''">
+                and bauthor like concat('%', #{bauthor}, '%')
+            </if>
+
+            <if test="bcategory != null and bcategory !=''">
+                and bcategory like concat('%', #{bcategory}, '%')
+            </if>
+
+            <if test="bplace != null and bplace !=''">
+                and bplace like concat('%', #{bplace}, '%')
+            </if>
+
+            <if test="bpublisher != null and bpublisher!=''">
+                and bpublisher like concat('%', #{bpublisher}, '%')
+            </if>
+
+            <if test="byear != null and byear!=''">
+                and byear=#{byear, javaType=java.time.LocalDate}
+            </if>
+
+            <if test="bstatus != null and bstatus!=''">
+                and bstatus=#{bstatus}
+            </if>
+
+            <if test="uid != null and uid!=''">
+                and uid=#{uid}
+            </if>
+
+            <if test="bbrodate != null and bbrodate!=''">
+                and bbrodate=#{bbrodate, javaType=java.time.LocalDate}
+            </if>
+            <if test="breturndate != null and breturndate!=''">
+                and breturndate=#{breturndate, javaType=java.time.LocalDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="findBookByBid" resultType="org.library.pojo.Book">
+        select * from Book where bid=#{bid}
+    </select>
+
+    <!-- 对应的插入字段的名字 -->
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="bid!=null and bid!=''">
+                bid,
+            </if>
+            <if test="bname!=null and bname!=''">
+                bname,
+            </if>
+            <if test="bauthor!=null and bauthor!=''">
+                bauthor,
+            </if>
+            <if test="bcategory!=null and bcategory!=''">
+                bcategory,
+            </if>
+            <if test="bplace!=null and bplace!=''">
+                bplace,
+            </if>
+
+            <if test="bpublisher!=null and bpublisher!=''">
+                bpublisher,
+            </if>
+            /*这里要记住日期是不能和空字符串比较的*/
+            <if test="byear!=null">
+                byear,
+            </if>
+
+            <if test="bstatus!=null and bstatus!=''">
+                bstatus,
+            </if>
+
+            <if test="uid!=null and uid!=''">
+                uid,
+            </if>
+            /*这里要记住日期是不能和空字符串比较的*/
+            <if test="bbrodate!=null ">
+                bbrodate,
+            </if>
+            /*这里要记住日期是不能和空字符串比较的*/
+            <if test="breturndate!=null ">
+                breturndate,
+            </if>
+        </trim>
+    </sql>
+
+
+    <!-- 对应的插入字段的值 -->
+    <sql id="values">
+        <trim suffixOverrides=",">
+            <if test="bid!=null and bid!=''">
+                #{bid},
+            </if>
+            <if test="bname!=null and bname!=''">
+                #{bname},
+            </if>
+            <if test="bauthor!=null and bauthor!=''">
+                #{bauthor},
+            </if>
+            <if test="bcategory!=null and bcategory!=''">
+                #{bcategory},
+            </if>
+            <if test="bplace!=null and bplace!=''">
+                #{bplace},
+            </if>
+            <if test="bpublisher!=null and bpublisher!=''">
+                #{bpublisher},
+            </if>
+            /*这里要记住日期是不能和空字符串比较的*/
+            <if test="byear!=null ">
+                #{byear, jdbcType=DATE,javaType=java.time.LocalDate},
+            </if>
+            <if test="bstatus!=null and bstatus!=''">
+                #{bstatus},
+            </if>
+            <if test="uid!=null and uid!=''">
+                #{uid},
+            </if>
+            /*这里要记住日期是不能和空字符串比较的*/
+            <if test="bbrodate!=null ">
+                #{bbrodate, jdbcType=DATE,javaType=java.time.LocalDate},
+            </if>
+            /*这里要记住日期是不能和空字符串比较的*/
+            <if test="breturndate!=null ">
+                #{breturndate,jdbcType=DATE,javaType=java.time.LocalDate},
+            </if>
+        </trim>
+    </sql>
+
+    <!--上面的两个语句也就是插入的数据源-->
+    <insert id="addBook">
+        insert into Book(<include refid="key"/>)
+        values(<include refid="values"/>)
+    </insert>
+
+    <update id="updateBook">
+        update Book
+        <set>
+            <if test="bid != null">bid=#{bid},</if>
+            <if test="bname != null">bname=#{bname},</if>
+            <if test="bauthor != null">bauthor=#{bauthor},</if>
+            <if test="bcategory != null">bcategory=#{bcategory},</if>
+            <if test="bplace != null">bplace=#{bplace},</if>
+            <if test="bpublisher != null">bpublisher=#{bpublisher},</if>
+            <if test="byear != null">byear= #{byear, jdbcType=DATE,javaType=java.time.LocalDate},</if>
+            <if test="bstatus != null">bstatus=#{bstatus},</if>
+            <if test="uid != null">uid=#{uid},</if>
+            <if test="bbrodate != null">bbrodate=#{bbrodate, jdbcType=DATE, javaType=java.time.LocalDate},</if>
+            <if test="breturndate != null">breturndate=#{breturndate, jdbcType=DATE, javaType=java.time.LocalDate}</if>
+        </set>
+        where bid=#{bid}
+    </update>
+    <!--删除一本书-->
+    <delete id="deleteBookByBid">
+        delete from Book where bid=#{bid}
+    </delete>
+
+    <!--根据书名统计数量-->
+    <select id="getCountByName" resultType="int">
+        SELECT count(*) FROM book WHERE bname = #{bname}
+    </select>
+
+    <!--根据作者统计数量-->
+    <select id="getCountByAuthor" resultType="int">
+        SELECT count(*) FROM book WHERE bauthor = #{bauthor}
+    </select>
+
+    <!--根据分类统计数量-->
+    <select id="getCountByCategory" resultType="int">
+        SELECT count(*) FROM book WHERE bcategory = #{Bcategory}
+    </select>
+
+    <!--还书，根据图书id将图书的借阅信息为“可借”，然后消除uid,日期-->
+    <update id="updateReturnBook">
+        update Book
+        <set>
+            <if test="bid != null">bid=#{bid},</if>
+            <if test="bname != null">bname=#{bname},</if>
+            <if test="bauthor != null">bauthor=#{bauthor},</if>
+            <if test="bcategory != null">bcategory=#{bcategory},</if>
+            <if test="bplace != null">bplace=#{bplace},</if>
+            <if test="bpublisher != null">bpublisher=#{bpublisher},</if>
+            <if test="byear != null">byear= #{byear, jdbcType=DATE,javaType=java.time.LocalDate},</if>
+            <if test="bstatus != null">bstatus="可借",</if>
+            <if test="uid != null">uid=null,</if>
+            <if test="bbrodate != null">bbrodate=null,</if>
+            <if test="breturndate != null">breturndate=null</if>
+        </set>
+        where bid=#{bid}
+    </update>
+
+
+
+
+
+
+
+
+
+</mapper>

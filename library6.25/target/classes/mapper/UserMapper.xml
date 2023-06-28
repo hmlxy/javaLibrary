@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,具体到dao中的那个dao接口-->
+<mapper namespace="org.library.dao.userDao">
+    <!--id对应的Mapper代理接⼝⽅法的⽅法名,这里也就是StudentDao接口的方法的方法名-->
+    <!-- resultType对应pojo中的实体类，等价于数据库中的student表 -->
+    <select id="findAllUser" resultType="org.library.pojo.User">
+        select * from User
+    </select>
+
+    <select id="findUser" resultType="org.library.pojo.User" parameterType="org.library.pojo.User">
+        select *
+        from User
+        <where>
+            <if test="uid != null and uid!=''">
+                uid=#{uid}
+            </if>
+            <if test="uname != null and uname !=''">
+                and uname like concat('%', #{uname}, '%')
+            </if>
+
+            <if test="usex != null and usex!=''">
+                and usex=#{usex}
+            </if>
+
+            <if test="uage != null and uage!=''">
+                and uage=#{uage}
+            </if>
+
+            <if test="udept != null and udept!=''">
+                and udept=#{udept}
+            </if>
+
+            <if test="upassword != null and upassword!=''">
+                and upassword=#{upassword}
+            </if>
+
+
+            <if test="upermission != null and upermission!=''">
+                and upermission=#{upermission}
+            </if>
+        </where>
+    </select>
+
+    <select id="findUserByUid" resultType="org.library.pojo.User">
+        select * from user where uid=#{uid}
+    </select>
+
+    <!-- 对应的插入字段的名字 -->
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="uid!=null and uid!=''">
+                uid,
+            </if>
+            <if test="uname!=null and uname!=''">
+                uname,
+            </if>
+
+            <if test="usex!=null and usex!=''">
+                usex,
+            </if>
+
+            <if test="uage!=null and uage!=''">
+                uage,
+            </if>
+
+            <if test="udept!=null and udept!=''">
+                udept,
+            </if>
+
+            <if test="upassword!=null and upassword!=''">
+                upassword,
+            </if>
+
+            <if test="upermission!=null and upermission!=''">
+                upermission,
+            </if>
+        </trim>
+    </sql>
+
+
+    <!-- 对应的插入字段的值 -->
+    <sql id="values">
+        <trim suffixOverrides=",">
+            <if test="uid!=null and uid!=''">
+                #{uid},
+            </if>
+            <if test="uname!=null and uname!=''">
+                #{uname},
+            </if>
+            <if test="usex!=null and usex!=''">
+                #{usex},
+            </if>
+            <if test="uage!=null and uage!=''">
+                #{uage},
+            </if>
+            <if test="udept!=null and udept!=''">
+                #{udept},
+            </if>
+            <if test="upassword!=null and upassword!=''">
+                #{upassword},
+            </if>
+
+            <if test="upermission!=null and upermission!=''">
+                #{upermission},
+            </if>
+        </trim>
+    </sql>
+
+    <!--上面的两个语句也就是插入的数据源-->
+    <insert id="addUser">
+        insert into user(<include refid="key"/>)
+        values(<include refid="values"/>)
+    </insert>
+
+    <update id="updateUser">
+        update user
+        <set>
+            <if test="uid != null">uid=#{uid},</if>
+            <if test="uname != null">uname=#{uname},</if>
+            <if test="usex != null">usex=#{usex},</if>
+            <if test="uage != null">uage=#{uage},</if>
+            <if test="udept != null">udept=#{udept},</if>
+            <if test="upassword != null">upassword=#{upassword},</if>
+            <if test="upermission != null">upermission=#{upermission}</if>
+        </set>
+        where uid=#{uid}
+    </update>
+
+    <delete id="deleteUserByUid">
+        delete from user where uid=#{uid}
+    </delete>
+
+    <!-- 根据管理员 ID 和密码查询管理员 -->
+    <!-- resultType要指定到具体路径的实体类   -->
+    <select id="findUserByIdAndPassword" parameterType="map" resultType="org.library.pojo.User">
+        SELECT * FROM User WHERE uid=#{uid} AND upassword=#{upassword}
+    </select>
+
+
+    <!-- 根据读者id查询所有借阅的图书-->
+    <!-- 将用于将查询结果映射成 org.library.pojo.Book 对象，
+    也就是对查询结果的列名与实体类的属性名进行映射配置
+    id 配置了主键列，column 属性配置了列名，property 属性配置了实体类的属性名
+    如果没有配置，则会自动匹配，可能因此有错误-->
+    <resultMap id="bookResult" type="org.library.pojo.Book">
+        <id column="bid" property="bid"/>
+        <result column="bname" property="bname"/>
+        <result column="bauthor" property="bauthor"/>
+        <result column="bcategory" property="bcategory"/>
+        <result column="bplace" property="bplace"/>
+        <result column="bpublisher" property="bpublisher"/>
+        <result column="byear" property="byear"/>
+        <result column="bstatus" property="bstatus"/>
+        <result column="uid" property="uid"/>
+        <result column="bbrodate" property="bbrodate"/>
+        <result column="breturndate" property="breturndate"/>
+    </resultMap>
+    <select id="getBooksByUserIdReturnASC" parameterType="String" resultMap="bookResult">
+        SELECT * FROM book b INNER JOIN user u ON b.uid = u.uid WHERE u.uid = #{uid} ORDER BY b.breturndate ASC
+    </select>
+
+    <!--根据借书时间降序-->
+    <select id="getBooksByUserIdBroDESC" parameterType="String" resultMap="bookResult">
+        SELECT * FROM book b INNER JOIN user u ON b.uid = u.uid WHERE u.uid = #{uid} ORDER BY b.Bbrodate DESC
+    </select>
+
+
+
+
+
+
+
+</mapper>

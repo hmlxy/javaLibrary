@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,具体到dao中的那个dao接口-->
+<mapper namespace="org.library.dao.adminDao">
+    <!--id对应的Mapper代理接⼝⽅法的⽅法名,这里也就是StudentDao接口的方法的方法名-->
+    <!-- resultType对应pojo中的实体类，等价于数据库中的student表 -->
+    <select id="findAllAdmin" resultType="org.library.pojo.Admin">
+        select * from admin
+    </select>
+
+    <select id="findAdmin" resultType="org.library.pojo.Admin" parameterType="org.library.pojo.Admin">
+        select *
+        from admin
+        <where>
+            <if test="aid != null and aid!=''">
+                aid=#{aid}
+            </if>
+            <if test="aname != null and aname !=''">
+                and aname like concat('%', #{aname}, '%')
+            </if>
+            <if test="apassword != null and apassword!=''">
+                and apassword=#{apassword}
+            </if>
+            <if test="aphone != null and aphone!=''">
+                and aphone=#{aphone}
+            </if>
+
+            <if test="apermission != null and apermission!=''">
+                and apermission=#{apermission}
+            </if>
+        </where>
+    </select>
+
+    <select id="findAdminByAid" resultType="org.library.pojo.Admin">
+        select * from admin where aid=#{aid}
+    </select>
+
+    <!-- 对应的插入字段的名字 -->
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="aid!=null and aid!=''">
+                aid,
+            </if>
+            <if test="aname!=null and aname!=''">
+                aname,
+            </if>
+            <if test="apassword!=null and apassword!=''">
+                apassword,
+            </if>
+            <if test="aphone!=null and aphone!=''">
+                aphone,
+            </if>
+            <if test="apermission!=null and apermission!=''">
+                apermission,
+            </if>
+        </trim>
+    </sql>
+
+
+    <!-- 对应的插入字段的值 -->
+    <sql id="values">
+        <trim suffixOverrides=",">
+            <if test="aid!=null and aid!=''">
+                #{aid},
+            </if>
+            <if test="aname!=null and aname!=''">
+                #{aname},
+            </if>
+            <if test="apassword!=null and apassword!=''">
+                #{apassword},
+            </if>
+            <if test="aphone!=null and aphone!=''">
+                #{aphone},
+            </if>
+            <if test="apermission!=null and apermission!=''">
+                #{apermission},
+            </if>
+        </trim>
+    </sql>
+
+    <!--上面的两个语句也就是插入的数据源-->
+    <insert id="addAdmin">
+        insert into admin(<include refid="key"/>)
+        values(<include refid="values"/>)
+    </insert>
+
+    <update id="updateAdmin">
+        update admin
+        <set>
+            <if test="aid != null">aid=#{aid},</if>
+            <if test="aname != null">aname=#{aname},</if>
+            <if test="apassword != null">apassword=#{apassword},</if>
+            <if test="aphone != null">aphone=#{aphone},</if>
+            <if test="apermission != null">apermission=#{apermission}</if>
+        </set>
+        where aid=#{aid}
+    </update>
+
+    <delete id="deleteAdminByAid">
+        delete from admin where aid=#{aid}
+    </delete>
+
+
+
+</mapper>

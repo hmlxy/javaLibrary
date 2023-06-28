@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="1" failures="0" name="org.school.dao.UserDaoTest" time="1.67" errors="0" skipped="0">
+  <properties>
+    <property name="java.vendor" value="IBM Corporation"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="sun.boot.class.path" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin\default\jclSC180\vm.jar;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\se-service.jar;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\rt.jar;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\resources.jar;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\jsse.jar;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\charsets.jar;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\jce.jar"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.runtime.version" value="1.8.0_382-b03"/>
+    <property name="user.name" value="HML"/>
+    <property name="java.compiler" value="j9jit29"/>
+    <property name="os.encoding" value="UTF-8"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="com.ibm.util.extralibs.properties" value=""/>
+    <property name="com.ibm.jcl.checkClassPath" value=""/>
+    <property name="user.language" value="zh"/>
+    <property name="com.ibm.oti.vm.bootstrap.library.path" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin\default;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin"/>
+    <property name="idea.version" value="2023.1.2"/>
+    <property name="sun.boot.library.path" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin\default;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin"/>
+    <property name="classworlds.conf" value="D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="jdk.extensions.version" value="8.0.382.0-ea"/>
+    <property name="java.version" value="1.8.0_382"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="com.ibm.system.agent.path" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="com.ibm.zero.version" value="2"/>
+    <property name="java.endorsed.dirs" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\endorsed"/>
+    <property name="com.ibm.oti.vm.library.version" value="29"/>
+    <property name="sun.jnu.encoding" value="GB18030"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="maven.conf" value="D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\plugins\maven\lib\maven3/conf"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="user.country" value="CN"/>
+    <property name="java.home" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre"/>
+    <property name="java.vm.info" value="JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20230608_693 (JIT enabled, AOT enabled)
+OpenJ9   - 936ec5450
+OMR      - 0e572348b
+JCL      - 1a75d66cae based on jdk8u382-b03"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.awt.fonts" value=""/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.version" value="v0.40.0-release-936ec5450"/>
+    <property name="user.variant" value=""/>
+    <property name="maven.ext.class.path" value="D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="jdk.extensions.name" value="Extensions for OpenJDK for Eclipse OpenJ9"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.specification.maintenance.version" value="5"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="ibm.signalhandling.sigint" value="true"/>
+    <property name="user.home" value="C:\Users\HML"/>
+    <property name="com.ibm.cpu.endian" value="little"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="ibm.signalhandling.sigchain" value="true"/>
+    <property name="java.library.path" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin\default;C:\Users\HML\.jdks\semeru-1.8.0_382\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Program Files\VM\VMprogram\bin\;C:\Program Files\PlasticSCM5\server;C:\Program Files\PlasticSCM5\client;C:\Users\HML\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\HML\AppData\Local\Programs\Python\Python38\;D:\python3.8\Scripts\;D:\python3.8\;C:\Program Files\nodejs\;C:\Windows\System32;C:\Users\HML\Desktop\nginx-1.23.1;C:\WINDOWS\System32\Wbem;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\MySQL\MySQL Server 8.0\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\HML\AppData\Roaming\npm;D:\Program Files\Git\Git\bin;C:\Program Files\dotnet\;D:\Program Files\JAVA17\bin;D:\Program Files\maven\apache-maven-3.5.3\bin;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\MySQL;D:\anaconda;D:\anaconda\Library\mingw-w64\bin;D:\anaconda\Library\usr\bin;D:\anaconda\Library\bin;D:\anaconda\Scripts;C:\Users\HML\AppData\Local\Microsoft\WindowsApps;C:\Users\HML\AppData\Roaming\npm;D:\SOFT\PyCharm Community Edition 2022.3.3\bin;;C:\Users\HML\.dotnet\tools;D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\bin;;D:\Program Files\Git\Git\bin;;."/>
+    <property name="java.vendor.url" value="https://www.ibm.com/semeru-runtimes"/>
+    <property name="java.vm.vendor" value="Eclipse OpenJ9"/>
+    <property name="java.fullversion" value="1.8.0_382-b03
+JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20230608_693 (JIT enabled, AOT enabled)
+OpenJ9   - 936ec5450
+OMR      - 0e572348b
+JCL      - 1a75d66cae based on jdk8u382-b03"/>
+    <property name="maven.home" value="D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\plugins\maven\lib\maven3"/>
+    <property name="java.runtime.name" value="IBM Semeru Runtime Open Edition"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2023.1.2 package"/>
+    <property name="java.class.path" value="D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\plugins\maven\lib\maven3\boot\plexus-classworlds.license;D:\Program Files\IJ IDLE\IntelliJ IDEA 2023.1.2\lib\idea_rt.jar"/>
+    <property name="jansi.passthrough" value="true"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.io.tmpdir" value="C:\Users\HML\AppData\Local\Temp\"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\HML\Desktop\SchoolProj6.21配置"/>
+    <property name="ibm.system.encoding" value="GB18030"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="ibm.signalhandling.rs" value="false"/>
+    <property name="java.ext.dirs" value="C:\Users\HML\.jdks\semeru-1.8.0_382\jre\lib\ext"/>
+    <property name="user.dir" value="C:\Users\HML\Desktop\SchoolProj6.21配置"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.name" value="Eclipse OpenJ9 VM"/>
+    <property name="com.ibm.oti.shared.enabled" value="false"/>
+    <property name="com.ibm.vm.bitmode" value="64"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="com.ibm.oti.configuration" value="scar"/>
+    <property name="java.specification.version" value="1.8"/>
+  </properties>
+  <testcase classname="org.school.dao.UserDaoTest" name="test" time="1.67"/>
+</testsuite>
